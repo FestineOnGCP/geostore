@@ -10,7 +10,6 @@ phases:
       - mvn clean install
   post_build:
     commands:
-      - aws s3 cp src/ s3://seamfix-985729960198-bucket
       - echo Build completed
 artifacts:
   files:
