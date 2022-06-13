@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+  build:
+    commands:
+      - cd src/
+      - mvn clean install
+  post_build:
+    commands:
+      - aws s3 cp src/ s3://seamfix-985729960198-bucket
+      - echo Build completed
+artifacts:
+  files:
+    - src/web/app/target/*.war
+    - scripts/server_start.sh
+    - scripts/server_stop.sh
+    - appspec.yml
+   
+  discard-paths: yes
